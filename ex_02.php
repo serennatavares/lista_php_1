@@ -10,7 +10,7 @@ function inverterTexto($texto){
      // por isso separamos o texto em um array de caracteres "de verdade" com 
      // preg_split() usando a flag "u" (Unicode/UTF-8).
 
-     $Ccaracteres = preg_split('//u', $texto, -1, PREG_SPLIT_NO_EMPTY);
+     $caracteres = preg_split('//u', $texto, -1, PREG_SPLIT_NO_EMPTY);
 
      //array_reverse() inverte a ordem dos elementos do array
      $caracteresInvertidos = array_reverse($caracteres);
@@ -32,7 +32,7 @@ $texto_usuario = "Programação em PHP! @2024 #ç~ã";
 
 echo "Texto original: $texto_usuario <br>";
 
-resultado = inverterTexto($texto_usuario);
+$resultado = inverterTexto($texto_usuario);
 
 echo "Texto invertido: " . $resultado["invertido"] . "<br>";
 echo "Quantidade de caracteres: " . $resultado["quantidade"] . "<br>";
