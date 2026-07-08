@@ -7,7 +7,12 @@
 
 function mascararCpf($cpf){
 
-$cpf = 
-$cpfMascarado = 
-//STR_REPLACE
+
+$ultimosQuatroDigitos = substr($cpf, -4);
+$cpfMascarado = str_repeat('*', strlen($cpf) - 4) . $ultimosQuatroDigitos;
+return $cpfMascarado;
 }
+
+$cpf = "12446744940";
+
+echo mascararCpf($cpf);
