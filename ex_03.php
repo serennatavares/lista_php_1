@@ -16,3 +16,4 @@ return $cpfMascarado;
 $cpf = "12446744940";
 
 echo mascararCpf($cpf);
+?>
