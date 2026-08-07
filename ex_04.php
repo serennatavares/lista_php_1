@@ -1,27 +1,37 @@
 <?php
 
-//Uma empresa deseja gerar senhas temporárias para seus colaboradores.
-//Crie uma função chamada gerarSenha() que receba a quantidade de caracteres
-//desejada e retorne uma senha aleatória contendo letras maiúsculas, minúsculas,
-//números e caracteres especiais.
+// Uma empresa deseja gerar senhas temporárias para seus colaboradores.
+// Crie uma função chamada gerarSenha() que receba a quantidade de caracteres
+// desejada e retorne uma senha aleatória contendo letras maiúsculas,
+// letras minúsculas, números e caracteres especiais.
 
-function gerarSenha($quantidadeCaracteres) {
-    $letrasMaiusculas = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-    $letrasMinusculas = 'abcdefghijklmnopqrstuvwxyz';
-    $numeros = '0123456789';
-    $caracteresEspeciais = '!@#$%^&*';
+function gerarSenha($tamanho){
 
-    $caracteres = $letrasMaiusculas . $letrasMinusculas . $numeros . $caracteresEspeciais;
+    // Monta um "banco" com todos os caracteres possíveis para a senha
+    $letrasMaiusculas = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    $letrasMinusculas = "abcdefghijklmnopqrstuvwxyz";
+    $numeros = "0123456789";
+    $especiais = "!@#$%&*-+";
 
-    $senha = '';
-    for ($i = 0; $i < $quantidadeCaracteres; $i++) {
-        $senha .= $caracteres[rand(0, strlen($caracteres) - 1)];
+    $todosCaracteres = $letrasMaiusculas . $letrasMinusculas . $numeros . $especiais;
+
+    // Quantidade total de caracteres disponíveis no banco acima
+    $quantidadeDisponivel = strlen($todosCaracteres) - 1;
+
+    $senha = "";
+
+    // Sorteia, caractere por caractere, uma posição aleatória do banco de caracteres
+    for ($i = 0; $i < $tamanho; $i++){
+        $posicaoAleatoria = rand(0, $quantidadeDisponivel);
+        $senha .= $todosCaracteres[$posicaoAleatoria];
     }
 
     return $senha;
+
 }
 
-$quantidadeCaracteres = 10; 
-$senhaGerada = gerarSenha($quantidadeCaracteres);
-echo $senhaGerada;
+$tamanho_usuario = 10;
+
+echo "Senha gerada com $tamanho_usuario caracteres: " . gerarSenha($tamanho_usuario) . "<br>";
+
 ?>

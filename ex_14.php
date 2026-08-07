@@ -1,78 +1,62 @@
 <?php
 
-function soma($numeros){
-    return array_sum($numeros);
-}
-
-function media($numeros){
-    return array_sum($numeros) / count($numeros);
-}
-
-function maiorValor($numeros){
-    return max($numeros);
-}
-
-function menorValor($numeros){
-    return min($numeros);
-}
-
-function mediana($numeros){
-
-    sort($numeros);
-
-    $quantidade = count($numeros);
-    $meio = floor($quantidade / 2);
-
-    if($quantidade % 2 == 0){
-        return ($numeros[$meio - 1] + $numeros[$meio]) / 2;
-    }else{
-        return $numeros[$meio];
-    }
-}
-
-function contarPares($numeros){
-
-    $pares = 0;
-
-    foreach($numeros as $numero){
-        if($numero % 2 == 0){
-            $pares++;
-        }
-    }
-
-    return $pares;
-}
-
-function contarImpares($numeros){
-
-    $impares = 0;
-
-    foreach($numeros as $numero){
-        if($numero % 2 != 0){
-            $impares++;
-        }
-    }
-
-    return $impares;
-}
+// Uma empresa de análise de dados precisa gerar informações estatísticas sobre
+// uma coleção de números. Crie uma função chamada estatisticasNumericas() que
+// receba um vetor de números e retorne:
+// Soma; Média; Maior valor; Menor valor; Mediana;
+// Quantidade de números pares; Quantidade de números ímpares.
 
 function estatisticasNumericas($numeros){
 
+    $soma = array_sum($numeros);
+    $quantidade = count($numeros);
+    $media = $soma / $quantidade;
+    $maiorValor = max($numeros);
+    $menorValor = min($numeros);
+
+    // Para calcular a mediana, primeiro precisamos ordenar o vetor
+    $numerosOrdenados = $numeros;
+    sort($numerosOrdenados);
+
+    $posicaoCentral = floor($quantidade / 2);
+
+    if ($quantidade % 2 == 0){
+        // Quantidade par de números: mediana é a média dos dois valores centrais
+        $mediana = ($numerosOrdenados[$posicaoCentral - 1] + $numerosOrdenados[$posicaoCentral]) / 2;
+    } else {
+        // Quantidade ímpar de números: mediana é o valor exatamente do meio
+        $mediana = $numerosOrdenados[$posicaoCentral];
+    }
+
+    // Conta quantos números são pares e quantos são ímpares
+    $quantidadePares = 0;
+    $quantidadeImpares = 0;
+
+    foreach ($numeros as $numero){
+        if ($numero % 2 == 0){
+            $quantidadePares++;
+        } else {
+            $quantidadeImpares++;
+        }
+    }
+
     return [
-        "soma" => soma($numeros),
-        "media" => media($numeros),
-        "maior" => maiorValor($numeros),
-        "menor" => menorValor($numeros),
-        "mediana" => mediana($numeros),
-        "pares" => contarPares($numeros),
-        "impares" => contarImpares($numeros)
+        "soma" => $soma,
+        "media" => $media,
+        "maior" => $maiorValor,
+        "menor" => $menorValor,
+        "mediana" => $mediana,
+        "pares" => $quantidadePares,
+        "impares" => $quantidadeImpares
     ];
+
 }
 
-$numeros = [10, 5, 8, 3, 15, 20];
+$numeros_usuario = [10, 5, 8, 3, 12, 7];
 
-$resultado = estatisticasNumericas($numeros);
+$resultado = estatisticasNumericas($numeros_usuario);
 
+echo "Números: " . implode(", ", $numeros_usuario) . "<br>";
 echo "Soma: " . $resultado["soma"] . "<br>";
 echo "Média: " . $resultado["media"] . "<br>";
 echo "Maior valor: " . $resultado["maior"] . "<br>";
